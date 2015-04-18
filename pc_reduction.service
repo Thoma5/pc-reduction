@@ -1,0 +1,11 @@
+[Unit]
+Description=Reduces power consumption
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/systemd/scripts/pc_reduction start
+ExecStop=/usr/lib/systemd/scripts/pc_reduction stop
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
