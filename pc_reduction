@@ -1,9 +1,15 @@
 #!/bin/sh
-if [[ $EUID != 0 ]]; then
-    echo "Root required"
-    exit 1
-fi
 
+start(){
+ modprobe msr
+ x86_energy_perf_policy powersave
+ powertop --auto-tune   
+    
+ WIFI=$(find /sys/class/net/*/ | grep wireless | head -n 1 | sed -s -e "s#^/sys.*net/##" -e "s#/wireless.*\$##")
+ iw dev $WIFI set power_save on   
+}
+
+stop(){
 echo 5 > /proc/sys/vm/laptop_mode
 echo 20 > /proc/sys/vm/dirty_ratio
 echo 10 > /proc/sys/vm/dirty_background_ratio
@@ -11,7 +17,6 @@ echo 3000 > /proc/sys/vm/dirty_expire_centisecs
 echo 500 > /proc/sys/vm/dirty_writeback_centisecs
 echo 1 > /proc/sys/kernel/nmi_watchdog
 echo 0 > /sys/module/snd_hda_intel/parameters/power_save
-
 
 modprobe msr
 x86_energy_perf_policy normal
@@ -23,3 +28,8 @@ for i in /sys/bus/usb/devices/*/power/autosuspend; do echo '2' > $i;done
 
 WIFI=$(find /sys/class/net/*/ | grep wireless | head -n 1 | sed -s -e "s#^/sys.*net/##" -e "s#/wireless.*\$##")
 iw dev $WIFI set power_save off
+}
+
+case $1 in
+  start|stop) "$1" ;;
+esac
