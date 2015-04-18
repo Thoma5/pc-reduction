@@ -1,7 +1,8 @@
 pc-reduction
 ============
 
-Scipts to minimize the power consumption of your notebook/pc running on Linux.
+Scipt to minimize the power consumption of your notebook/pc running on Linux.
+
 Currently only tested on my Dell Inspirion Ultrabook (14z 5423).
 
 Requirements
@@ -15,6 +16,16 @@ Requirements
 + Intel i* CPU (SandyBridge or newer)
 + setting some kernel parameters (WIFI, ASPM ...)
 + COMPATIBLE NOTEBOOK- Can lead to dataloss on some notebooks (SATA-ALPM, ASPM...)
++ 
+Recommended kernel params (additionally to those you already have lieke quiet etc.):
+```
+acpi_osi='!Windows 2012' acpi_osi='Linux' add_efi_memmap video.use_native_backlight=1 ipv6.disable=1 elevator=noop drm.vblankoffdelay=1 pcie_aspm=force i915.i915_enable_rc6=7 i915.i915_enable_fbc=1 i915.lvds_downclock=1 i915.semaphores=1 nmi_watchdog=0 ath9k.ps_enable=1
+```
+
+
+Warning
+-------
+Could lead to data loss if your device is not compatible to the techology used (SATA_ALPM,ASPM,...).
 
 Install
 -------
@@ -42,10 +53,6 @@ sudo systemctl enable pc_reduction.service
 ```
 and same with disable for deactivating.
 
-
-Warning
--------
-Could lead to data loss if your device is not compatible to the techology used (SATA_ALPM,ASPM,...).
 
 Disclaimer
 ----------
