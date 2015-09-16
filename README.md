@@ -19,7 +19,7 @@ Requirements
 + 
 Recommended kernel params (additionally to those you already have lieke quiet etc.):
 ```
-acpi_osi='!Windows 2012' acpi_osi='Linux' add_efi_memmap video.use_native_backlight=1 ipv6.disable=1 elevator=noop drm.vblankoffdelay=1 pcie_aspm=force i915.i915_enable_rc6=7 i915.i915_enable_fbc=1 i915.lvds_downclock=1 i915.semaphores=1 nmi_watchdog=0 ath9k.ps_enable=1
+acpi_osi='!Windows 2012' acpi_osi='Linux' add_efi_memmap video.use_native_backlight=1 ipv6.disable=1 elevator=noop drm.vblankoffdelay=1 pcie_aspm=force i915.enable_rc6=7 i915.enable_fbc=1 i915.lvds_downclock=1 i915.semaphores=1 nmi_watchdog=0 ath9k.ps_enable=1
 ```
 
 
